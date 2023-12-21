@@ -1,9 +1,14 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { AppRouter } from "./Router/AppRouter";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <AppRouter />
+    </div>
+  );
 }
 
 export default App;
