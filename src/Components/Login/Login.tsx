@@ -1,11 +1,15 @@
 import React from "react";
 import "./Login.scss";
+import { useNavigate } from "react-router";
+import { LANDING_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
 
 interface ILogin {
   authComponentOnChange: () => void;
 }
 
 export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="LogInWrapper">
       <div className="welcomeMessageWrapper">
@@ -32,7 +36,9 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
         <div className="AuthButtonsWrapper">
           <div>
             <button>
-              <span className="text">LOGIN</span>
+              <span onClick={() => navigate(`${LANDING_ROUTE.PATH}`)} className="text">
+                LOGIN
+              </span>
             </button>
           </div>
 
