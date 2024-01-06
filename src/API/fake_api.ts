@@ -16,6 +16,17 @@ const sleep = async (milliseconds: number): Promise<boolean> => {
   return new Promise((resolve) => setTimeout(() => resolve(true), milliseconds));
 };
 
+const denemeUser: User = {
+  username: "ulaş",
+  password: "1234",
+};
+
+users.forEach((user, index) => {
+  if (denemeUser.username === user.username) {
+    users[index] = denemeUser;
+  }
+});
+
 export const registerUser = async (newUser: User): Promise<string> => {
   await sleep(1000);
 
