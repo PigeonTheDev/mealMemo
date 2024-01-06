@@ -3,7 +3,7 @@ interface User {
     password: string;
   }
   
-  const users: User[] = [{username: "feyza", password: "1234"},{username: "göksu", password: "1234"},{username: "ulaş", password: "1234"},{username: "can", password: "1234"},{username: "celal", password: "1234"},{username: "can", password: "1234"},{username: "berkay", password: "1234"}];
+  const users: User[] = [{username: "feyza", password: "1234"},{username: "göksu", password: "1234"},{username: "ulaş", password: "1234"},{username: "celal", password: "1234"},{username: "can", password: "1234"},{username: "berkay", password: "1234"}];
   
   const sleep = async (milliseconds: number): Promise<boolean> => {
     return new Promise((resolve) => setTimeout(() => resolve(true), milliseconds));
