@@ -13,7 +13,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
   return (
     <div className="LogInWrapper">
       <div className="welcomeMessageWrapper">
-        <div>WELCOME BACK a,</div>
+        <div>WELCOME BACK ,</div>
         <div className="smallerWelcome">PLEASE LOGIN TO YOUR ACCOUNT.</div>
       </div>
       <div>
