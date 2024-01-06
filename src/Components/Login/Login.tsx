@@ -1,29 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.scss";
 import { useNavigate } from "react-router";
 import { LANDING_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
+import { User } from "../../Models/User";
+import { loginUser } from "../../API/fake_api";
 
 interface ILogin {
   authComponentOnChange: () => void;
 }
 
+const initUser: User = {
+  username: "",
+  password: "",
+};
+
 export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
   const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState<User>(initUser);
+
+  const handleLogin = (user: User) => {
+    loginUser(user)
+      .then((data) => {
+        console.log(data);
+        navigate(`${LANDING_ROUTE.PATH}`);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="LogInWrapper">
       <div className="welcomeMessageWrapper">
-        <div>WELCOME BACK ,</div>
+        <div>WELCOME BACK,</div>
         <div className="smallerWelcome">PLEASE LOGIN TO YOUR ACCOUNT.</div>
       </div>
       <div>
         <div className="logInInputWrapper">
           E-MAIL ADDRESS
-          <input type="text" className="AuthInput" />
+          <input
+            onChange={(e) => {
+              setUserInfo({ ...userInfo, username: e.target.value });
+            }}
+            type="text"
+            className="AuthInput"
+          />
         </div>
         <div className="logInInputWrapper">
           PASSWORD
-          <input type="text" className="AuthInput" />
+          <input
+            onChange={(e) => {
+              setUserInfo({ ...userInfo, password: e.target.value });
+            }}
+            type="text"
+            className="AuthInput"
+          />
         </div>
 
         <div className="AuthOperationsWrapper">
@@ -36,7 +66,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
         <div className="AuthButtonsWrapper">
           <div>
             <button>
-              <span onClick={() => navigate(`${LANDING_ROUTE.PATH}`)} className="text">
+              <span onClick={() => handleLogin(userInfo)} className="text">
                 LOGIN
               </span>
             </button>
