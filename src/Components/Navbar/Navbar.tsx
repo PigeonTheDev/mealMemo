@@ -28,9 +28,7 @@ export const Navbar = () => {
         <div onClick={() => navigate(`${SETTINGS_ROUTE.PATH}`)} className="navbarItem">
           {SETTINGS_ROUTE.TITLE}
         </div>
-        <div style={{ cursor: "default" }} className="navbarItem">
-          User Name
-        </div>
+        <div style={{ cursor: "default" }} className="navbarItem"></div>
       </div>
     </div>
   );
