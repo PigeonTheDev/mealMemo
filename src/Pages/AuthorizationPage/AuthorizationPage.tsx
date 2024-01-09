@@ -5,9 +5,38 @@ import "./AuthorizationPage.scss";
 import sushi from "./SUSHI.png";
 import pie from "./PIE.png";
 import mushrooms from "./MUSHROOMS.png";
+import { UserWithPass } from "../../Models/UserWithPass";
+import { loginUser, registerUser } from "../../API/fake_api";
+import { LANDING_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { LOGIN_FINALLY } from "../../Redux/UserActions";
 
 export const AuthorizationPage = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogin = (user: UserWithPass) => {
+    loginUser(user)
+      .then((data) => {
+        console.log(data);
+        dispatch(LOGIN_FINALLY(data));
+        navigate(`${LANDING_ROUTE.PATH}`);
+      })
+      .finally(() => {})
+      .catch((err) => console.error(err));
+  };
+
+  const handleRegister = (user: UserWithPass) => {
+    registerUser(user)
+      .then((data) => {
+        console.log(data);
+        dispatch(LOGIN_FINALLY(data));
+        navigate(`${LANDING_ROUTE.PATH}`);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="authorizationWrapper">
@@ -19,7 +48,11 @@ export const AuthorizationPage = () => {
           />
         </svg>
         <div className="authComponentWrapper">
-          {isLogin ? <Login authComponentOnChange={() => setIsLogin(false)} /> : <SignUp authComponentOnChange={() => setIsLogin(true)} />}
+          {isLogin ? (
+            <Login onLogin={handleLogin} authComponentOnChange={() => setIsLogin(false)} />
+          ) : (
+            <SignUp onRegister={handleRegister} authComponentOnChange={() => setIsLogin(true)} />
+          )}
         </div>
       </div>
       <div className="authorizationImagesWrapper">

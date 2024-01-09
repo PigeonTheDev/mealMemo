@@ -1,32 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { LANDING_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
-import { User } from "../../Models/User";
-import { registerUser } from "../../API/fake_api";
+
+import { UserWithPass } from "../../Models/UserWithPass";
 
 interface ISignUp {
   authComponentOnChange: () => void;
+  onRegister: (user: UserWithPass) => void;
 }
 
-const initUser: User = {
+const initUser: UserWithPass = {
   username: "",
+  email: "",
   password: "",
 };
 
-export const SignUp: React.FC<ISignUp> = ({ authComponentOnChange }) => {
-  const navigate = useNavigate();
-
-  const [userInfo, setUserInfo] = useState<User>(initUser);
+export const SignUp: React.FC<ISignUp> = ({ authComponentOnChange, onRegister }) => {
+  const [userInfo, setUserInfo] = useState<UserWithPass>(initUser);
   const [initPass, setInitPass] = useState<string>("");
-
-  const handleLogin = (user: User) => {
-    registerUser(user)
-      .then((data) => {
-        console.log(data);
-        navigate(`${LANDING_ROUTE.PATH}`);
-      })
-      .catch((err) => console.error(err));
-  };
 
   return (
     <div className="LogInWrapper">
@@ -79,7 +68,16 @@ export const SignUp: React.FC<ISignUp> = ({ authComponentOnChange }) => {
 
           <div style={{ marginLeft: "6rem" }}>
             <button>
-              <span onClick={() => handleLogin(userInfo)} className="text">
+              <span
+                onClick={() => {
+                  if (initPass !== initUser.password) {
+                    alert("Lütfen Şifrelerin Eşleştiğinden Emin Olun");
+                  } else {
+                    onRegister(userInfo);
+                  }
+                }}
+                className="text"
+              >
                 SIGNUP
               </span>
             </button>

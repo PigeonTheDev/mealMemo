@@ -1,33 +1,20 @@
-interface User {
-  username: string;
-  password: string;
-}
+import { User } from "../Models/User";
+import { UserWithPass } from "../Models/UserWithPass";
 
-const users: User[] = [
-  { username: "feyza", password: "1234" },
-  { username: "göksu", password: "1234" },
-  { username: "ulaş", password: "1234" },
-  { username: "celal", password: "1234" },
-  { username: "can", password: "1234" },
-  { username: "berkay", password: "1234" },
+const users: UserWithPass[] = [
+  { username: "feyza", email: "fz@gmail.com", password: "1234" },
+  { username: "göksu", email: "fz@gmail.com", password: "1234" },
+  { username: "ulaş", email: "fz@gmail.com", password: "1234" },
+  { username: "celal", email: "fz@gmail.com", password: "1234" },
+  { username: "can", email: "fz@gmail.com", password: "1234" },
+  { username: "berkay", email: "fz@gmail.com", password: "1234" },
 ];
 
 const sleep = async (milliseconds: number): Promise<boolean> => {
   return new Promise((resolve) => setTimeout(() => resolve(true), milliseconds));
 };
 
-const denemeUser: User = {
-  username: "ulaş",
-  password: "1234",
-};
-
-users.forEach((user, index) => {
-  if (denemeUser.username === user.username) {
-    users[index] = denemeUser;
-  }
-});
-
-export const registerUser = async (newUser: User): Promise<string> => {
+export const registerUser = async (newUser: UserWithPass): Promise<User> => {
   await sleep(1000);
 
   const existingUser = users.find((user) => user.username === newUser.username);
@@ -37,16 +24,16 @@ export const registerUser = async (newUser: User): Promise<string> => {
   }
 
   users.push(newUser);
-  return Promise.resolve("Registration successful");
+  return Promise.resolve({ username: newUser.username, email: newUser.email });
 };
 
-export const loginUser = async (credentials: User): Promise<User> => {
+export const loginUser = async (credentials: UserWithPass): Promise<User> => {
   await sleep(1000);
 
   const user = users.find((u) => u.username === credentials.username && u.password === credentials.password);
 
   if (user) {
-    return Promise.resolve(user);
+    return Promise.resolve({ username: user.username, email: user.email });
   } else {
     return Promise.reject("Invalid username or password");
   }

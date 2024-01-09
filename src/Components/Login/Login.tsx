@@ -1,32 +1,21 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import { useNavigate } from "react-router";
-import { LANDING_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
-import { User } from "../../Models/User";
-import { loginUser } from "../../API/fake_api";
+
+import { UserWithPass } from "../../Models/UserWithPass";
 
 interface ILogin {
   authComponentOnChange: () => void;
+  onLogin: (user: UserWithPass) => void;
 }
 
-const initUser: User = {
+const initUser: UserWithPass = {
   username: "",
+  email: "",
   password: "",
 };
 
-export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
-  const navigate = useNavigate();
-
-  const [userInfo, setUserInfo] = useState<User>(initUser);
-
-  const handleLogin = (user: User) => {
-    loginUser(user)
-      .then((data) => {
-        console.log(data);
-        navigate(`${LANDING_ROUTE.PATH}`);
-      })
-      .catch((err) => console.error(err));
-  };
+export const Login: React.FC<ILogin> = ({ authComponentOnChange, onLogin }) => {
+  const [userInfo, setUserInfo] = useState<UserWithPass>(initUser);
 
   return (
     <div className="LogInWrapper">
@@ -66,7 +55,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange }) => {
         <div className="AuthButtonsWrapper">
           <div>
             <button>
-              <span onClick={() => handleLogin(userInfo)} className="text">
+              <span onClick={() => onLogin(initUser)} className="text">
                 LOGIN
               </span>
             </button>
