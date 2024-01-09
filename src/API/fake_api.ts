@@ -15,7 +15,7 @@ const sleep = async (milliseconds: number): Promise<boolean> => {
 };
 
 export const registerUser = async (newUser: UserWithPass): Promise<User> => {
-  await sleep(1000);
+  await sleep(2000);
 
   const existingUser = users.find((user) => user.username === newUser.username);
 
@@ -28,7 +28,8 @@ export const registerUser = async (newUser: UserWithPass): Promise<User> => {
 };
 
 export const loginUser = async (credentials: UserWithPass): Promise<User> => {
-  await sleep(1000);
+  await sleep(2000);
+  console.log(credentials);
 
   const user = users.find((u) => u.username === credentials.username && u.password === credentials.password);
 

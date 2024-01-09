@@ -25,7 +25,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange, onLogin }) => {
       </div>
       <div>
         <div className="logInInputWrapper">
-          E-MAIL ADDRESS
+          User Name
           <input
             onChange={(e) => {
               setUserInfo({ ...userInfo, username: e.target.value });
@@ -55,7 +55,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange, onLogin }) => {
         <div className="AuthButtonsWrapper">
           <div>
             <button>
-              <span onClick={() => onLogin(initUser)} className="text">
+              <span onClick={() => onLogin(userInfo)} className="text">
                 LOGIN
               </span>
             </button>

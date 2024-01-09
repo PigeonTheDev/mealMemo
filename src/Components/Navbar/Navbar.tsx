@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router";
 import "./Navbar.scss";
 import { LANDING_ROUTE, MEMORIES_ROUTE, SETTINGS_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
+import { GlobalState } from "../../Redux/reducers";
+import { useSelector } from "react-redux";
+import { User } from "../../Models/User";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const user: User = useSelector((state: GlobalState) => state.user);
 
   return (
     <div className="navbarWrapper">
@@ -28,7 +32,9 @@ export const Navbar = () => {
         <div onClick={() => navigate(`${SETTINGS_ROUTE.PATH}`)} className="navbarItem">
           {SETTINGS_ROUTE.TITLE}
         </div>
-        <div style={{ cursor: "default" }} className="navbarItem"></div>
+        <div style={{ cursor: "default" }} className="navbarItem">
+          {user.username}
+        </div>
       </div>
     </div>
   );

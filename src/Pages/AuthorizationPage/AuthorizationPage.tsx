@@ -11,21 +11,23 @@ import { LANDING_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { LOGIN_FINALLY } from "../../Redux/UserActions";
+import { FoodLoader } from "../../Components/Base/FoodLoader/FoodLoader";
 
 export const AuthorizationPage = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogin = (user: UserWithPass) => {
+    setIsLoading(true);
     loginUser(user)
       .then((data) => {
         console.log(data);
         dispatch(LOGIN_FINALLY(data));
         navigate(`${LANDING_ROUTE.PATH}`);
       })
-      .finally(() => {})
-      .catch((err) => console.error(err));
+      .finally(() => setIsLoading(false));
   };
 
   const handleRegister = (user: UserWithPass) => {
@@ -35,11 +37,12 @@ export const AuthorizationPage = () => {
         dispatch(LOGIN_FINALLY(data));
         navigate(`${LANDING_ROUTE.PATH}`);
       })
-      .catch((err) => console.error(err));
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <div className="authorizationWrapper">
+      <FoodLoader isLoading={isLoading} />
       <div className="authorizationInfoWrapper">
         <svg width="500" height="92" viewBox="0 0 500 92" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
