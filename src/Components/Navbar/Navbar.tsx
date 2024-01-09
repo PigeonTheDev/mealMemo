@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import "./Navbar.scss";
-import { SETTINGS_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
+import { LANDING_ROUTE, MEMORIES_ROUTE, SETTINGS_ROUTE } from "../../Enums/ROUTE_PATH_TITLE";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -14,8 +14,17 @@ export const Navbar = () => {
         />
       </svg>
       <div className="navbarItemsWrapper">
-        <div className="navbarItem">Home</div>
-        <div className="navbarItem">Memories</div>
+        <div
+          onClick={() => {
+            navigate(`${LANDING_ROUTE.PATH}`);
+          }}
+          className="navbarItem"
+        >
+          {LANDING_ROUTE.TITLE}
+        </div>
+        <div onClick={() => navigate(`${MEMORIES_ROUTE.PATH}`)} className="navbarItem">
+          {MEMORIES_ROUTE.TITLE}
+        </div>
         <div onClick={() => navigate(`${SETTINGS_ROUTE.PATH}`)} className="navbarItem">
           {SETTINGS_ROUTE.TITLE}
         </div>
