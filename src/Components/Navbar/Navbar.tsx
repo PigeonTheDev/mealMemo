@@ -8,6 +8,7 @@ import { User } from "../../Models/User";
 export const Navbar = () => {
   const navigate = useNavigate();
   const user: User = useSelector((state: GlobalState) => state.user);
+  const localStorageUser = JSON.parse(localStorage.getItem("user") || "{}");
 
   return (
     <div className="navbarWrapper">
@@ -32,8 +33,8 @@ export const Navbar = () => {
         <div onClick={() => navigate(`${SETTINGS_ROUTE.PATH}`)} className="navbarItem">
           {SETTINGS_ROUTE.TITLE}
         </div>
-        <div style={{ cursor: "default" }} className="navbarItem">
-          {user.username}
+        <div style={{ cursor: "default", textDecoration: "underline" }} className="navbarItem">
+          {user.username ? user.username : localStorageUser.username}
         </div>
       </div>
     </div>

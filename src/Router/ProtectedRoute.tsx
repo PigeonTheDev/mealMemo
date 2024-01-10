@@ -9,7 +9,9 @@ interface IProtectedRoute {
 }
 
 export const ProtectedRoute: React.FC<IProtectedRoute> = ({ user, children }) => {
-  if (user.username !== "") {
+  const localStorageUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+  if (user.username !== "" || Object.keys(localStorageUser).length !== 0) {
     return <>{children}</>;
   } else {
     return <Navigate to={LOGIN_ROUTE.PATH} replace />;

@@ -1,0 +1,94 @@
+/* Custom calendar container styles */
+.custom-calendar {
+  font-family: "Julius"; /* Set the desired font family for the calendar */
+  width: 70%; /* Set the overall width of the calendar */
+  height: 100%;
+}
+
+/* Calendar header styles */
+.calendar-header {
+  h2 {
+    color: #984300;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #fff;
+  padding: 0.5rem;
+  gap: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.calendar-header button {
+  background: none;
+  border: 1px solid #000;
+  border-radius: 100%;
+  padding: 0 0.5rem;
+  rotate: 90deg;
+  color: #333;
+  font-size: 2rem;
+  cursor: pointer;
+  outline: none;
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* Days of the week header styles */
+.days-of-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.day {
+  height: 30px;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+.day.weekend {
+  color: #984300;
+}
+
+/* Calendar days styles */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  padding: 10px;
+}
+
+.calendar-day {
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid #000;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #984300;
+  }
+}
+.calendar-day.selected {
+  background-color: #984300;
+}
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+/* Add any additional styles or customizations for the calendar here */

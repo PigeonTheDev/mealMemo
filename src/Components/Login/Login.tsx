@@ -5,7 +5,7 @@ import { UserWithPass } from "../../Models/UserWithPass";
 
 interface ILogin {
   authComponentOnChange: () => void;
-  onLogin: (user: UserWithPass) => void;
+  onLogin: (user: UserWithPass, stayLoggedIn: boolean) => void;
 }
 
 const initUser: UserWithPass = {
@@ -16,6 +16,7 @@ const initUser: UserWithPass = {
 
 export const Login: React.FC<ILogin> = ({ authComponentOnChange, onLogin }) => {
   const [userInfo, setUserInfo] = useState<UserWithPass>(initUser);
+  const [stayLoggedIn, setStayLoggedIn] = useState<boolean>(false);
 
   return (
     <div className="LogInWrapper">
@@ -47,7 +48,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange, onLogin }) => {
 
         <div className="AuthOperationsWrapper">
           <div>
-            <input type="checkbox" /> STAY LOGGED IN
+            <input type="checkbox" onClick={() => setStayLoggedIn(!stayLoggedIn)} /> STAY LOGGED IN
           </div>
 
           <div className="forgotPassword">FORGOT PASSWORD</div>
@@ -55,7 +56,7 @@ export const Login: React.FC<ILogin> = ({ authComponentOnChange, onLogin }) => {
         <div className="AuthButtonsWrapper">
           <div>
             <button>
-              <span onClick={() => onLogin(userInfo)} className="text">
+              <span onClick={() => onLogin(userInfo, stayLoggedIn)} className="text">
                 LOGIN
               </span>
             </button>

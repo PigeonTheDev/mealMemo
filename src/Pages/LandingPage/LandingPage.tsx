@@ -1,8 +1,10 @@
 import { Navbar } from "../../Components/Navbar/Navbar";
 import exampleFood from "./exampleFood.png";
 import "./LandingPage.scss";
+const currentDate = new Date();
 
 export const LandingPage = () => {
+  console.log(currentDate.getDay());
   return (
     <>
       <Navbar />

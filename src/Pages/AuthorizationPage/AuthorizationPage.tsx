@@ -19,11 +19,14 @@ export const AuthorizationPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogin = (user: UserWithPass) => {
+  const handleLogin = (user: UserWithPass, stayLoggedIn: boolean) => {
     setIsLoading(true);
     loginUser(user)
       .then((data) => {
         console.log(data);
+        if (stayLoggedIn) {
+          localStorage.setItem("user", JSON.stringify(data));
+        }
         dispatch(LOGIN_FINALLY(data));
         navigate(`${LANDING_ROUTE.PATH}`);
       })

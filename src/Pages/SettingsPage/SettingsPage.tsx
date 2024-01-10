@@ -1,8 +1,14 @@
+import { useSelector } from "react-redux";
 import { Navbar } from "../../Components/Navbar/Navbar";
 import settingsFood from "./settingsFood.png";
 import "./SettingsPage.scss";
+import { GlobalState } from "../../Redux/reducers";
+import { User } from "../../Models/User";
 
 export const SettingsPage = () => {
+  const user: User = useSelector((state: GlobalState) => state.user);
+  const localStorageUser = JSON.parse(localStorage.getItem("user") || "{}");
+
   return (
     <>
       <Navbar />
@@ -11,19 +17,12 @@ export const SettingsPage = () => {
           <div className="SettingsProfileHeader">PROFILE</div>
           <div>
             <div className="SettingsProfileItemHeader">NAME</div>
-            <div className="SettingsProfileItemValue">* USER NAME</div>
+            <div className="SettingsProfileItemValue">* {user.username ? user.username : localStorageUser.username}</div>
           </div>
-          <div>
-            <div className="SettingsProfileItemHeader">SURNAME</div>
-            <div className="SettingsProfileItemValue">* USER SURNAME</div>
-          </div>
+
           <div>
             <div className="SettingsProfileItemHeader">E-MAIL</div>
-            <div className="SettingsProfileItemValue">* USER EMAIL</div>
-          </div>
-          <div>
-            <div className="SettingsProfileItemHeader">PASSWORD</div>
-            <div className="SettingsProfileItemValue">* USER PASSWORD</div>
+            <div className="SettingsProfileItemValue">* {user.email ? user.email : localStorageUser.email}</div>
           </div>
         </div>
         <img src={settingsFood} alt="food" />
