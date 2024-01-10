@@ -13,7 +13,10 @@ const initUser: UserWithPass = {
   password: "",
 };
 
-export const SignUp: React.FC<ISignUp> = ({ authComponentOnChange, onRegister }) => {
+export const SignUp: React.FC<ISignUp> = ({
+  authComponentOnChange,
+  onRegister,
+}) => {
   const [userInfo, setUserInfo] = useState<UserWithPass>(initUser);
   const [initPass, setInitPass] = useState<string>("");
 
@@ -25,7 +28,7 @@ export const SignUp: React.FC<ISignUp> = ({ authComponentOnChange, onRegister })
       </div>
       <div>
         <div className="logInInputWrapper">
-          NAME -SURNAME
+          NAME & SURNAME
           <input
             type="text"
             onChange={(e) => {
